@@ -33,8 +33,8 @@ const Question = ({ questionIndex, onSelectAnswer, onSkipAnswer }) => {
       //* FOR SOME REASON THE TIMER ISN'T AFFECTED BY THE if() CONDITION SO I HAVE TO HARDCODE THEM HERE
       setTimeout(() => {
         onSelectAnswer(answer);
-      }, 1000);
-    }, 2000);
+      }, 2000);
+    }, 1000);
   };
 
   let answerState = "";
