@@ -29,8 +29,10 @@ const Question = ({ questionIndex, onSelectAnswer, onSkipAnswer }) => {
 
   let answerState = "";
 
-  if (answer.selectedAnswers) {
+  if (answer.selectedAnswers && answer.isCorrect !== null) {
     answerState = answer.isCorrect ? "correct" : "wrong";
+  } else if (answer.selectedAnswers) {
+    answerState = "answered";
   }
 
   return (
