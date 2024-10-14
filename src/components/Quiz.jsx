@@ -4,6 +4,7 @@ import QUESTIONS from "../questions.js";
 import quizCompleteLogo from "../assets/quiz-complete.png";
 import QuestionTimer from "./QuestionTimer.jsx";
 import Answers from "./Answers.jsx";
+import Question from "./Question.jsx";
 
 const Quiz = () => {
   const [userAnswers, setUserAnswers] = useState([]);
@@ -53,22 +54,7 @@ const Quiz = () => {
 
   return (
     <div id="quiz">
-      <div id="question">
-        <QuestionTimer
-          //* keys can be used to reset the component
-          key={activeQuestionIndex}
-          timeout={10000}
-          onTimeout={handleSkipAnswer}
-        />
-        <h2>{QUESTIONS[activeQuestionIndex].text}</h2>
-        <Answers
-          key={activeQuestionIndex}
-          answerState={answerState}
-          answers={QUESTIONS[activeQuestionIndex].answers}
-          selectedAnswers={userAnswers[userAnswers.length - 1]}
-          onSelect={handleSelectAnswer}
-        />
-      </div>
+      <Question key={activeQuestionIndex} />
     </div>
   );
 };
