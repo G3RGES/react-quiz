@@ -1,9 +1,8 @@
-import React, { useCallback, useRef, useState } from "react";
+import React, { useCallback, useState } from "react";
 
 import QUESTIONS from "../questions.js";
 import quizCompleteLogo from "../assets/quiz-complete.png";
-import QuestionTimer from "./QuestionTimer.jsx";
-import Answers from "./Answers.jsx";
+
 import Question from "./Question.jsx";
 
 const Quiz = () => {
@@ -54,7 +53,15 @@ const Quiz = () => {
 
   return (
     <div id="quiz">
-      <Question key={activeQuestionIndex} />
+      <Question
+        key={activeQuestionIndex}
+        questionText={QUESTIONS[activeQuestionIndex].text}
+        answers={QUESTIONS[activeQuestionIndex].answers}
+        onSelectAnswer={handleSelectAnswer}
+        selectedAnswers={userAnswers[userAnswers.length - 1]}
+        answerState={answerState}
+        onSkipAnswer={handleSkipAnswer}
+      />
     </div>
   );
 };
