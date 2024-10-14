@@ -39,8 +39,9 @@ const Quiz = () => {
   return (
     <div id="quiz">
       <Question
-        questionIndex={activeQuestionIndex}
+        //* keys can be used to reset the component
         key={activeQuestionIndex}
+        questionIndex={activeQuestionIndex}
         onSelectAnswer={handleSelectAnswer}
         onSkipAnswer={handleSkipAnswer}
       />
