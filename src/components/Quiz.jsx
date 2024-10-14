@@ -7,32 +7,17 @@ import Question from "./Question.jsx";
 
 const Quiz = () => {
   const [userAnswers, setUserAnswers] = useState([]);
-  const [answerState, setAnswerState] = useState("");
 
   //* deriving the indix of the current active question from the questions answered already
-  const activeQuestionIndex =
-    answerState === "" ? userAnswers.length : userAnswers.length - 1;
+  const activeQuestionIndex = userAnswers.length;
 
   const quizComplete = activeQuestionIndex === QUESTIONS.length;
 
   const handleSelectAnswer = useCallback(
     function handleSelectAnswer(selectedAnswer) {
-      setAnswerState("answered");
       setUserAnswers((prevAnswers) => {
         return [...prevAnswers, selectedAnswer];
       });
-
-      setTimeout(() => {
-        if (selectedAnswer === QUESTIONS[activeQuestionIndex].answers[0]) {
-          setAnswerState("correct");
-        } else {
-          setAnswerState("wrong");
-        }
-
-        setTimeout(() => {
-          setAnswerState("");
-        }, 2000);
-      }, 1000);
     },
     [activeQuestionIndex]
   );
@@ -54,12 +39,9 @@ const Quiz = () => {
   return (
     <div id="quiz">
       <Question
+        questionIndex={activeQuestionIndex}
         key={activeQuestionIndex}
-        questionText={QUESTIONS[activeQuestionIndex].text}
-        answers={QUESTIONS[activeQuestionIndex].answers}
         onSelectAnswer={handleSelectAnswer}
-        selectedAnswers={userAnswers[userAnswers.length - 1]}
-        answerState={answerState}
         onSkipAnswer={handleSkipAnswer}
       />
     </div>
