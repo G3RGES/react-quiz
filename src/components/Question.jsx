@@ -9,6 +9,16 @@ const Question = ({ questionIndex, onSelectAnswer, onSkipAnswer }) => {
     isCorrect: null,
   });
 
+  let timer = 10000;
+
+  if (answer.selectedAnswers) {
+    timer = 1000;
+  }
+
+  if (answer.isCorrect !== null) {
+    timer = 2000;
+  }
+
   const handdleSelectAnswer = (answer) => {
     setAnswer({
       selectedAnswers: answer,
@@ -20,11 +30,11 @@ const Question = ({ questionIndex, onSelectAnswer, onSkipAnswer }) => {
         selectedAnswers: answer,
         isCorrect: QUESTIONS[questionIndex].answers[0] === answer,
       });
-
+      //* FOR SOME REASON THE TIMER ISN'T AFFECTED BY THE if() CONDITION SO I HAVE TO HARDCODE THEM HERE
       setTimeout(() => {
         onSelectAnswer(answer);
-      }, 2000);
-    }, 1000);
+      }, 1000);
+    }, 2000);
   };
 
   let answerState = "";
@@ -38,10 +48,10 @@ const Question = ({ questionIndex, onSelectAnswer, onSkipAnswer }) => {
   return (
     <div id="question">
       <QuestionTimer
-        //* keys can be used to reset the component
-
-        timeout={10000}
-        onTimeout={onSkipAnswer}
+        key={timer}
+        timeout={timer}
+        onTimeout={answer.selectedAnswers === "" ? onSkipAnswer : null}
+        mode={answerState}
       />
       <h2>{QUESTIONS[questionIndex].text}</h2>
       <Answers
