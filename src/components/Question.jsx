@@ -1,21 +1,29 @@
 import React from "react";
+import QuestionTimer from "./QuestionTimer";
+import Answers from "./Answers";
 
-const Question = () => {
+const Question = ({
+  questionText,
+  answers,
+  onSelectAnswer,
+  selectedAnswers,
+  answerState,
+  onSkipAnswer,
+}) => {
   return (
     <div id="question">
       <QuestionTimer
         //* keys can be used to reset the component
-        // key={activeQuestionIndex}
+
         timeout={10000}
-        onTimeout={handleSkipAnswer}
+        onTimeout={onSkipAnswer}
       />
-      <h2>{QUESTIONS[activeQuestionIndex].text}</h2>
+      <h2>{questionText}</h2>
       <Answers
-        // key={activeQuestionIndex}
         answerState={answerState}
-        answers={QUESTIONS[activeQuestionIndex].answers}
-        selectedAnswers={userAnswers[userAnswers.length - 1]}
-        onSelect={handleSelectAnswer}
+        answers={answers}
+        selectedAnswers={selectedAnswers}
+        onSelect={onSelectAnswer}
       />
     </div>
   );
